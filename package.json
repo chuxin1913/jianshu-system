@@ -37,5 +37,16 @@
   },
   "dependencies": {
     "antd": "^3.18.1"
+  },
+  "babel": { 
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": "css"
+        }
+      ]
+    ]
   }
 }

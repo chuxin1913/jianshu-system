@@ -48,6 +48,15 @@ module.exports = {
             "sass-loader"
         ]
       },
+      {
+        test: /\.less$/,
+        use: [
+            // fallback to style-loader in development
+            process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+            "css-loader",
+            "less-loader"
+        ]
+      },
       //图片配置
       {
         test: /\.(png|jpg|gif)$/i,
@@ -74,25 +83,8 @@ module.exports = {
           }
           // 'file-loader'
         ]
-      },
-      //antd配置
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            "plugins": [
-              ["import", {
-                "libraryName": "antd",
-                "libraryDirectory": "es",
-                "style": "css" // `style: true` 会加载 less 文件
-              }]
-            ]
-          }
-        }
-      } 
+      }
+ 
     ]
   },
   plugins: [
@@ -100,17 +92,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template:'./src/index.html'
     }),
-    //独立css文件
+    //独立css,less,sass文件
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: '[id].css',
-    }),
-    // 独立sass文件
-    new MiniCssExtractPlugin({
       filename: 'sass/[name].sass',
       chunkFilename: '[id].sass',
-    }),
-    
+      filename: 'less/[name].less',
+      chunkFilename: '[id].less',
+    }),    
   ],
   //独立公共模块
   optimization: {
