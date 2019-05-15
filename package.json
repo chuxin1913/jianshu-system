@@ -6,8 +6,8 @@
   "author": "fs <fs1904253956@qq.com>",
   "license": "MIT",
   "scripts": {
-    "dev":"node_modules/.bin/webpack-dev-server",
-    "dist":"node_modules/.bin/webpack -p"
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "dist": "node_modules/.bin/webpack -p"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
