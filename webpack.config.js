@@ -2,7 +2,6 @@ const path =              require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// require('font-awesome-webpack')
 module.exports = {
   entry: './src/index.jsx',
   output: {
@@ -20,7 +19,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env','@babel/preset-react']
+            presets: ['@babel/preset-env','@babel/preset-react'],
+            plugins:[
+                 ['import',{libraryName:'antd', style:true}]]
           }
         }
       },
@@ -43,10 +44,10 @@ module.exports = {
         test: /\.scss$/,
         use: [
             // fallback to style-loader in development
-            process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+            process.env.NODE_ENV !== 'production' ? 'style-loader': MiniCssExtractPlugin.loader,
             "css-loader",
-            "sass-loader"
-        ]
+            "sass-loader",       
+        ],
       },
       {
         test: /\.less$/,
@@ -98,9 +99,13 @@ module.exports = {
       chunkFilename: '[id].css',
       filename: 'sass/[name].sass',
       chunkFilename: '[id].sass',
+      
+    }),  
+    new MiniCssExtractPlugin({
       filename: 'less/[name].less',
       chunkFilename: '[id].less',
-    }),    
+    })
+      
   ],
   //独立公共模块
   optimization: {
