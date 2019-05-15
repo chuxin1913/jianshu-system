@@ -74,7 +74,25 @@ module.exports = {
           }
           // 'file-loader'
         ]
-      }  
+      },
+      //antd配置
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            "plugins": [
+              ["import", {
+                "libraryName": "antd",
+                "libraryDirectory": "es",
+                "style": "css" // `style: true` 会加载 less 文件
+              }]
+            ]
+          }
+        }
+      } 
     ]
   },
   plugins: [
@@ -92,6 +110,7 @@ module.exports = {
       filename: 'sass/[name].sass',
       chunkFilename: '[id].sass',
     }),
+    
   ],
   //独立公共模块
   optimization: {
