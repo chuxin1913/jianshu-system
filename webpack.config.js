@@ -1,19 +1,14 @@
 const path =              require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // require('font-awesome-webpack')
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-  // entry: './src/app.jsx',
-  entry:{
-    vendors:[
-      'font-awesome-loader'
-    ],
-    app:'./src/app.jsx'
-  },
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.js'
+    publicPath:'/dist/',
+    filename: 'js/index.js'
   },
   mode: "development",
   module: {
@@ -43,6 +38,7 @@ module.exports = {
           'css-loader',
         ]
       },
+      //scss配置
       {
         test: /\.scss$/,
         use: [
@@ -52,48 +48,77 @@ module.exports = {
             "sass-loader"
         ]
       },
+      //图片配置
       {
         test: /\.(png|jpg|gif)$/i,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
+              limit: 8192,
+              name:'resource/[name].[ext]'
             }
           }
         ]
       },
+      //字体图标配置
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
+              limit: 8192,
+              name:'resource/[name].[ext]'
             }
           }
+          // 'file-loader'
         ]
-      }
-      // {
-      //   test: /\.(woff|woff2|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/, 
-      //   loader: 'url-loader?limit=10000'
-      // }
+      }  
     ]
   },
   plugins: [
+    //独立html文件
     new HtmlWebpackPlugin({
       template:'./src/index.html'
     }),
-    // new ExtractTextPlugin("styles.css"),
+    //独立css文件
     new MiniCssExtractPlugin({
-      filename: 'index.css',
+      filename: 'css/[name].css',
       chunkFilename: '[id].css',
     }),
+    //独立sass文件
     new MiniCssExtractPlugin({
-      filename: 'index.sass',
-      chunkFilename: '[id].css',
-    })
-
-  ]
-  
+      filename: 'sass/[name].sass',
+      chunkFilename: '[id].sass',
+    }),
+  ],
+  //独立公共模块
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  },
+  devServer: {
+    //  contentBase: './dist'
+    port:8089
+  }
 };
