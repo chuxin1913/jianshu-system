@@ -87,7 +87,7 @@ module.exports = {
       filename: 'css/[name].css',
       chunkFilename: '[id].css',
     }),
-    //独立sass文件
+    // 独立sass文件
     new MiniCssExtractPlugin({
       filename: 'sass/[name].sass',
       chunkFilename: '[id].sass',
