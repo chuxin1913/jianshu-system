@@ -1,6 +1,7 @@
 const path =              require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// require('font-awesome-webpack')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: './src/app.jsx',
@@ -36,20 +37,6 @@ module.exports = {
           'css-loader',
         ]
       },
-      //sass文件配置
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     {
-      //       loader: MiniCssExtractPlugin.loader,
-      //       options: {
-      //         publicPath: '../',
-      //         hmr: process.env.NODE_ENV === 'development',
-      //       },
-      //     },
-      //     'sass-loader'
-      //   ]
-      // }
       {
         test: /\.scss$/,
         use: [
@@ -58,7 +45,33 @@ module.exports = {
             "css-loader",
             "sass-loader"
         ]
-    }
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      }
+      // {
+      //   test: /\.(woff|woff2|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/, 
+      //   loader: 'url-loader?limit=10000'
+      // }
     ]
   },
   plugins: [
@@ -71,8 +84,6 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: 'index.sass',
       chunkFilename: '[id].css',
     })
