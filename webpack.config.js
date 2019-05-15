@@ -4,7 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // require('font-awesome-webpack')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-  entry: './src/app.jsx',
+  // entry: './src/app.jsx',
+  entry:{
+    vendors:[
+      'font-awesome-loader'
+    ],
+    app:'./src/app.jsx'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'app.js'
