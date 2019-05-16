@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import "./index.css"
 import  "./index.scss"
-import "./test.less"
+import "./text.less"
 import './../node_modules/font-awesome/css/font-awesome.css';
 import { DatePicker } from 'antd';
 ReactDom.render(
