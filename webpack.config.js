@@ -1,13 +1,21 @@
 const path =              require('path');
 const webpack = require('webpack');
+// const argv = JSON.parse(process.env.npm_config_argv).original;
+// const contentBase = path.resolve(__dirname+'/src/index.jsx'+argv[atgv.length-1])
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath:'/dist/',
+    publicPath:'http://localhost:8088/',
+    // publicPath: "/dist/"
     filename: 'js/index.js'
+  },
+  resolve:{
+    alias:{
+      page:path.resolve(__dirname, 'src/page')
+    }
   },
   mode: "development",
   module: {
@@ -74,8 +82,7 @@ module.exports = {
             javascriptEnabled: true,
             },
         }],
-    },
-      
+      },
       //图片配置
       {
         test: /\.(png|jpg|gif)$/i,
@@ -146,6 +153,6 @@ module.exports = {
   },
   devServer: {
     //  contentBase: './dist'
-    port:8089
+    port:8088
   }
 };

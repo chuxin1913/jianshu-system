@@ -1,14 +1,20 @@
-import React from 'react'
+import React,{Component} from 'react'
 import ReactDom from 'react-dom'
-import "./index.css"
-import  "./index.scss"
-import "./text.less"
 import './../node_modules/font-awesome/css/font-awesome.css';
-import { DatePicker } from 'antd';
-ReactDom.render(
-    <div>
-        <DatePicker></DatePicker>
-        <h1 className="hel lol">123</h1>
-    </div>,
-    document.getElementById('app')
-)
+import Header from "page/header/index.jsx"
+// <Header/>
+import store from "../src/store/reducer"
+class App extends Component{
+    constructor(){
+        super()
+        this.state = store.getState();    
+    }
+    render(){
+        return(
+            <div>
+                <input value={this.state.iptValue}></input>
+            </div>
+        )
+    }
+}
+ReactDom.render(<App/>,document.getElementById('app'))
