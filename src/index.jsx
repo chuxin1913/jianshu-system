@@ -3,7 +3,7 @@ import ReactDom from 'react-dom'
 import './../node_modules/font-awesome/css/font-awesome.css';
 import Header from "page/header/index.jsx"
 // <Header/>
-import store from "../src/store/reducer"
+import store from "../src/store/reducer.jsx"
 class App extends Component{
     constructor(){
         super()
