@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath:'http://localhost:8088/',
+    publicPath:'http://localhost:8089/',
     // publicPath: "/dist/"
     filename: 'js/index.js'
   },
@@ -153,6 +153,6 @@ module.exports = {
   },
   devServer: {
     //  contentBase: './dist'
-    port:8088
+    port:8089
   }
 };
